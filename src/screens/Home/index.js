@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PicturesWall from '@components/PicturesWall';
 
+const jph = '//jsonplaceholder.typicode.com/posts/';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ class Home extends Component {
     };
   }
 
-  onFileListChange = (files) => {
+  onFilesChange = (files) => {
     console.log('filted files: ', files);
     this.setState({
       files
@@ -22,7 +24,11 @@ class Home extends Component {
 
     return (
       <div>
-        <PicturesWall onFileListChange={this.onFileListChange} files={files} />
+        <PicturesWall
+          onFilesChange={this.onFilesChange}
+          files={files}
+          action={jph}
+        />
       </div>
     );
   }
