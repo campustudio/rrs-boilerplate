@@ -8,31 +8,33 @@ import {
  * Based on antd Upload component, basic props type details can be refered from official docs:
  * https://ant.design/components/upload-cn/
  *
- * validType: PropTypes.string, valid image type string which can be uploaded, e.g. 'image/png,image/jpg,image/jpeg';
- * limitSize: PropTypes.number, limit size for uploaded image, default 10M;
- * files: PropTypes.array.isRequired, files accepted from/sent to parent component;
  * action: PropTypes.string.isRequired, remote url for uploading;
  * onFilesChange: PropTypes.func.isRequired, change event for uploading;
+ * files: PropTypes.array, files accepted from/sent to parent component;
+ * validType: PropTypes.string, valid image type string which can be uploaded, e.g. 'image/png,image/jpg,image/jpeg';
+ * limitSize: PropTypes.number, limit size for uploaded image, default 10M;
  */
 export default class PicturesWall extends Component {
   static propTypes = {
-    isMultiple: PropTypes.bool,
-    validType: PropTypes.string,
-    limitSize: PropTypes.number,
-    files: PropTypes.array.isRequired,
     action: PropTypes.string.isRequired,
     onFilesChange: PropTypes.func.isRequired,
+    files: PropTypes.array,
+    validType: PropTypes.string,
+    limitSize: PropTypes.number,
+    isMultiple: PropTypes.bool,
     outerProps: PropTypes.object,
   }
 
   static defaultProps = {
+    files: [],
+    validType: 'image/png,image/jpg,image/jpeg',
     limitSize: 10,
     isMultiple: false,
     outerProps: {},
-    validType: 'image/png,image/jpg,image/jpeg',
   }
 
   state = {
+    fileList: this.props.files ? this.props.files : [],
     previewVisible: false,
     previewImage: '',
   }
@@ -64,6 +66,10 @@ export default class PicturesWall extends Component {
     if (onFilesChange) {
       onFilesChange(files);
     }
+
+    this.setState({
+      fileList: files,
+    });
   }
 
   handleCancel = () => this.setState({ previewVisible: false })
@@ -76,7 +82,8 @@ export default class PicturesWall extends Component {
   }
 
   render() {
-    const { previewVisible, previewImage } = this.state;
+    const { previewVisible, previewImage, fileList } = this.state;
+    console.log('render fileList: ', fileList);
     const {
       files, action, validType, isMultiple, outerProps,
     } = this.props;
@@ -89,7 +96,7 @@ export default class PicturesWall extends Component {
 
     const props = {
       action,
-      fileList: files,
+      fileList,
       accept: validType,
       multiple: isMultiple,
       listType: 'picture-card',
