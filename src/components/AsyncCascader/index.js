@@ -2,142 +2,152 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { message } from 'antd';
 import CascaderPlate from './CascaderPlate';
-import convertor from './convertor';
+
+const testUrl = '//jsonplaceholder.typicode.com/posts/';
 
 export default class AsyncCascader extends Component {
   static propTypes = {
+    fieldNames: PropTypes.object.isRequired,
+    optionsUrl: PropTypes.string,
+    onCascaderChange: PropTypes.func,
+    childrenUrl: PropTypes.string,
     type: PropTypes.string,
+    valueUrl: PropTypes.string,
   }
 
   static defaultProps = {
+    optionsUrl: testUrl,
+    onCascaderChange: () => {},
+    childrenUrl: testUrl,
     type: 'add',
+    valueUrl: testUrl,
   }
 
   constructor(props) {
     super(props);
     this.state = {
       options: null,
-      address: null,
+      finalVal: [],
     };
     this.targetOption = null;
   }
 
   componentDidMount = async () => {
-    const { type } = this.props;
-    const tempOptions = await this.getOptions();
-    const newOptions = convertor.formatKeys(tempOptions);
+    const { type, fieldNames } = this.props;
+    const { value = 'value' } = fieldNames;
+    const resOptions = await this.getOptions();
 
     if (type === 'edit') {
-      const newAddress = await this.getAddress();
+      const currentVal = await this.getValue();
       this.setState({
-        address: newAddress,
+        finalVal: currentVal || [],
       });
-      newOptions.forEach((ele) => {
-        if (ele.value === newAddress[0]) {
+      resOptions.forEach((ele) => {
+        if (ele[value] === currentVal[0]) {
           this.targetOption = ele;
         }
       });
-      console.log('newOptions: ', newOptions);
       if (this.targetOption) {
-        // this.targetOption.loading = true;
-        try {
-          const res = await fetch('https://jsonplaceholder.typicode.com/users');
-          const resData = convertor.formatLeafKeys([{
-            label: `${this.targetOption.label}city001`,
-            value: `${this.targetOption.value}001`,
-          }, {
-            label: `${this.targetOption.label}city002`,
-            value: `${this.targetOption.value}002`,
-          }]);
-
-          // this.targetOption.loading = false;
-          this.targetOption.children = resData;
-        } catch (err) {
-          message.error(err.toString());
-          return err;
-        }
-        console.log('this.targetOption1: ', this.targetOption);
+        this.targetOption = await this.addChildren(this.targetOption);
       }
+      console.log('type is edit => this.targetOption: ', this.targetOption);
+    } else {
+      console.log('this.targetOption: ', this.targetOption);
     }
-    console.log('this.targetOption2: ', this.targetOption);
 
     this.setState({
-      options: newOptions,
+      options: resOptions || [],
     });
   }
 
   getOptions = async () => {
-    const tempOptions = [{
-      value: '000',
-      label: 'Zhejiang',
-      isLeaf: false,
-    }, {
-      value: '111',
-      label: 'Jiangsu',
-      isLeaf: false,
-    }];
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-
-    return tempOptions;
-  }
-
-  getAddress = async () => {
-    const newAddress = ['111', '111001'];
-    const res = await fetch('https://jsonplaceholder.typicode.com/users');
-
-    return newAddress;
-  }
-
-  onLoad = async (targetOption) => {
-    console.log('onLoad targetOption: ', targetOption);
-    const { options } = this.state;
-    targetOption.loading = true;
-
-    // load options lazily
     try {
-      const res = await fetch('https://jsonplaceholder.typicode.com/users');
-      const resData = convertor.formatLeafKeys([{
-        label: `${targetOption.label}city001`,
-        value: `${targetOption.value}001`,
-      }, {
-        label: `${targetOption.label}city002`,
-        value: `${targetOption.value}002`,
-      }]);
-      targetOption.loading = false;
-      targetOption.children = resData;
-
-      this.setState({
-        options
+      const { optionsUrl } = this.props;
+      const apiRes = await fetch(optionsUrl);
+      const apiOptions = await apiRes.json() || [];
+      const resOptions = apiOptions.map((ele) => {
+        return { ...ele, isLeaf: false };
       });
-
-      return res;
+      return resOptions;
     } catch (err) {
       message.error(err.toString());
-      return err;
+      return [];
     }
   }
 
-  onCascaderChange = ({ value }) => {
-    console.log('onCascaderChange value: ', value);
+  getChildren = async () => {
+    try {
+      const { childrenUrl } = this.props;
+      const apiRes = await fetch(childrenUrl);
+      const apiChildren = await apiRes.json() || [];
+      return apiChildren;
+    } catch (err) {
+      message.error(err.toString());
+      return [];
+    }
+  }
+
+  getValue = async () => {
+    try {
+      const { valueUrl } = this.props;
+      const apiRes = await fetch(valueUrl);
+      const apiValue = await apiRes.json() || [];
+      return apiValue;
+    } catch (err) {
+      message.error(err.toString());
+      return [];
+    }
+  }
+
+  onCascaderChange = ({ value, selectedOptions }) => {
+    const { onCascaderChange } = this.props;
+    onCascaderChange({
+      value,
+      selectedOptions,
+    });
     this.setState({
-      address: value,
+      finalVal: value,
     });
   }
 
+  asyncLoad = async (tarOpt) => {
+    const { options } = this.state;
+    tarOpt = await this.addChildren(tarOpt);
+    this.setState({
+      options
+    });
+  }
+
+  addChildren = async (tarOpt) => {
+    tarOpt.loading = true;
+    const resChildren = await this.getChildren();
+    tarOpt.loading = false;
+    tarOpt.children = resChildren || [];
+
+    return tarOpt;
+  }
+
   render() {
-    const { options, address } = this.state;
-    const { fieldNames } = this.props;
+    const { fieldNames, type } = this.props;
+    const { options, finalVal } = this.state;
 
     return (
       <div>
-        {  
+        {
           options
           && (
-            <CascaderPlate fieldNames={fieldNames} matchOption={this.targetOption} value={address} options={options} asyncLoad={this.onLoad} onCascaderChange={this.onCascaderChange} />
+            <CascaderPlate
+              fieldNames={fieldNames}
+              options={options}
+              onCascaderChange={this.onCascaderChange}
+              asyncLoad={this.asyncLoad}
+              type={type}
+              matchOption={this.targetOption}
+              value={finalVal}
+            />
           )
         }
       </div>
     );
   }
 }
-

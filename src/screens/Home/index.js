@@ -2,46 +2,76 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PicturesWall from '@components/PicturesWall';
 import AsyncCascader from '@components/AsyncCascader';
+import UploadImage from '@components/UploadImage';
 
-const jph = '//jsonplaceholder.typicode.com/posts/';
+const testUrl = '//jsonplaceholder.typicode.com/posts/';
 
-class Home extends Component {
+const jph = testUrl;
+const optionsUrl = testUrl;
+const childrenUrl = testUrl;
+const valueUrl = testUrl;
+
+export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      files: [],
-      // files: [{
-      //   uid: 'rc-upload-1556800838178-4',
-      //   status: 'done',
-      //   name: 'galaxy.png'
-      // }],
+      // files: [],
+      files: [
+        'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      ],
     };
   }
 
+  transformFiles2PureUrl = (files) => {
+    let pureUrlArr = [];
+    if (files && files instanceof Array) {
+      pureUrlArr = files.map((ele) => {
+        if (ele.url) {
+          return ele.url || '';
+        }
+        if (ele.response && ele.response.url) { // dynamic
+          return ele.response.url || '';
+        }
+        return '';
+      });
+    }
+
+    return pureUrlArr;
+  }
+
   onFilesChange = (files) => {
-    console.log('filted files: ', files);
+    console.log('filtered files: ', files);
+    this.setState({
+      files
+    });
+  }
+
+  onCascaderChange = ({ value }) => {
+    console.log('onCascaderChange value: ', value);
   }
 
   render() {
     const { files } = this.state;
+    console.log('render files: ', files);
 
     return (
       <div>
         <PicturesWall
           action={jph}
           onFilesChange={this.onFilesChange}
-          files={files}
+          transformFiles2PureUrl={this.transformFiles2PureUrl}
+          isMultiple
         />
-        <AsyncCascader type="edit" fieldNames={{ label: 'label', value: 'value', children: 'children' }} />
+        <AsyncCascader
+          fieldNames={{ label: 'id', value: 'id' }}
+          optionsUrl={optionsUrl}
+          onCascaderChange={this.onCascaderChange}
+          childrenUrl={childrenUrl}
+          valueUrl={valueUrl}
+          type="edit"
+        />
+        {/* <UploadImage /> */}
       </div>
     );
   }
 }
-
-const mapStateToProps = state => ({
-});
-
-const mapDispatchToProps = dispatch => ({
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);

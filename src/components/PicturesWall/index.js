@@ -4,6 +4,20 @@ import {
   Upload, Icon, Modal, message,
 } from 'antd';
 
+let uid = -1; // 设置负数防止与 antd 内部的重合
+function genImgUid() {
+  uid--;
+  return uid;
+}
+
+function transformPureUrl2Files(images = []) {
+  return images.map(x => ({
+    status: 'done',
+    uid: genImgUid(),
+    url: x,
+  }));
+}
+
 /**
  * Based on antd Upload component, basic props type details can be refered from official docs:
  * https://ant.design/components/upload-cn/
@@ -18,6 +32,7 @@ export default class PicturesWall extends Component {
   static propTypes = {
     action: PropTypes.string.isRequired,
     onFilesChange: PropTypes.func.isRequired,
+    transformFiles2PureUrl: PropTypes.func.isRequired,
     files: PropTypes.array,
     validType: PropTypes.string,
     limitSize: PropTypes.number,
@@ -34,9 +49,19 @@ export default class PicturesWall extends Component {
   }
 
   state = {
-    fileList: this.props.files ? this.props.files : [],
+    fileList: [],
     previewVisible: false,
     previewImage: '',
+  }
+
+  componentDidMount() {
+    const { files } = this.props;
+    if (files && files instanceof Array && files.length > 0) {
+      const objFiles = transformPureUrl2Files(files);
+      this.setState({
+        fileList: objFiles,
+      });
+    }
   }
 
   beforeUploadImage = (file) => {
@@ -62,14 +87,20 @@ export default class PicturesWall extends Component {
       return ele.status !== 'error';
     });
 
-    const { onFilesChange } = this.props;
-    if (onFilesChange) {
-      onFilesChange(files);
-    }
-
     this.setState({
       fileList: files,
     });
+
+    const { transformFiles2PureUrl } = this.props;
+    let pureUrlArr = [];
+    if (transformFiles2PureUrl) {
+      pureUrlArr = transformFiles2PureUrl(files);
+    }
+
+    const { onFilesChange } = this.props;
+    if (onFilesChange) {
+      onFilesChange(pureUrlArr);
+    }
   }
 
   handleCancel = () => this.setState({ previewVisible: false })
@@ -85,7 +116,7 @@ export default class PicturesWall extends Component {
     const { previewVisible, previewImage, fileList } = this.state;
     console.log('render fileList: ', fileList);
     const {
-      files, action, validType, isMultiple, outerProps,
+      action, validType, isMultiple, outerProps,
     } = this.props;
     const uploadButton = (
       <div>
@@ -111,7 +142,7 @@ export default class PicturesWall extends Component {
         <Upload
           {...props}
         >
-          {files.length >= 3 ? null : uploadButton}
+          {fileList.length >= 3 ? null : uploadButton}
         </Upload>
         <Modal visible={previewVisible} onCancel={this.handleCancel}>
           <img alt="ima" src={previewImage} />

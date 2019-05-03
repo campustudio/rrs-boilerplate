@@ -6,7 +6,6 @@ import { beforeUploadImage } from '../../utils';
 export default class UploadImage extends React.Component {
   static propTypes = {
     src: string,
-    localUid: number.isRequired,
     fileStatus: string
   }
 
@@ -22,43 +21,6 @@ export default class UploadImage extends React.Component {
   }
 
   handleImageChange = (info) => {
-    console.log('handleImageChange info: ', info);
-    const {
-      localUid, onImageChanging, onImageChange, onError
-    } = this.props;
-
-    if (!info || !info.file || !info.file.status) {
-      return;
-    }
-
-    const file = info.file;
-
-    if (file.status === 'uploading') {
-      onImageChanging && onImageChanging(localUid);
-      return;
-    }
-
-    if (file.status === 'done') {
-      const response = file.response;
-      if (response) {
-        if (response.status === 0) {
-          const { info = [] } = response.data;
-          if (info.length > 0 && info[0].url) {
-            onImageChange && onImageChange(info[0].url, localUid);
-          }
-        } else {
-          onError && onError(localUid);
-          message.error(response.message);
-        }
-
-        if (response.id) {
-          message.info(response.id);
-        }
-      } else {
-        onError && onError(localUid);
-        message.error('上传失败，请重试。');
-      }
-    }
   }
 
   render() {

@@ -60,6 +60,23 @@ export default class CascaderPlate extends Component {
       style,
     };
 
+    // const props = options.length === 0 ? {
+    //   ...basicOptions,
+    //   placeholder: '暂无数据',
+    // } : (
+    //   matchOption ? {
+    //     ...basicOptions,
+    //     value,
+    //   } : (
+    //     type === 'edit' ? {
+    //       ...basicOptions,
+    //       placeholder: '暂无匹配数据',
+    //     } : {
+    //       ...basicOptions
+    //     }
+    //   )
+    // );
+
     let props = basicOptions;
     if (options.length === 0) {
       props = {
