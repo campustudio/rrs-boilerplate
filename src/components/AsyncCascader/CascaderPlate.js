@@ -3,25 +3,25 @@ import PropTypes from 'prop-types';
 import { Cascader } from 'antd';
 
 export default class CascaderPlate extends Component {
-  static propTypes = {
-    fieldNames: PropTypes.object.isRequired,
-    options: PropTypes.array.isRequired,
-    onCascaderChange: PropTypes.func,
-    asyncLoad: PropTypes.func,
-    type: PropTypes.string,
-    matchOption: PropTypes.object,
-    value: PropTypes.array,
-    style: PropTypes.object,
-  }
+  // static propTypes = {
+  //   fieldNames: PropTypes.object.isRequired,
+  //   options: PropTypes.array.isRequired,
+  //   onCascaderChange: PropTypes.func,
+  //   asyncLoad: PropTypes.func,
+  //   type: PropTypes.string,
+  //   matchOption: PropTypes.object,
+  //   value: PropTypes.array,
+  //   style: PropTypes.object,
+  // }
 
-  static defaultProps = {
-    onCascaderChange: () => {},
-    asyncLoad: () => {},
-    type: 'add',
-    matchOption: null,
-    value: [],
-    style: { width: 300 }
-  }
+  // static defaultProps = {
+  //   onCascaderChange: () => {},
+  //   asyncLoad: () => {},
+  //   type: 'add',
+  //   matchOption: null,
+  //   value: [],
+  //   style: { width: 300 }
+  // }
 
   onChange = (value, selectedOptions) => {
     const { onCascaderChange } = this.props;
@@ -85,3 +85,23 @@ export default class CascaderPlate extends Component {
     );
   }
 }
+
+CascaderPlate.propTypes = {
+  fieldNames: PropTypes.object.isRequired,
+  options: PropTypes.array.isRequired,
+  onCascaderChange: PropTypes.func,
+  asyncLoad: PropTypes.func,
+  type: PropTypes.string,
+  matchOption: PropTypes.object,
+  value: PropTypes.array,
+  style: PropTypes.object,
+};
+
+CascaderPlate.defaultProps = {
+  onCascaderChange: () => {},
+  asyncLoad: () => {},
+  type: 'add',
+  matchOption: null,
+  value: [],
+  style: { width: 300 }
+};

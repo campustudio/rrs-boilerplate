@@ -6,22 +6,22 @@ import CascaderPlate from './CascaderPlate';
 const testUrl = '//jsonplaceholder.typicode.com/posts/';
 
 export default class AsyncCascader extends Component {
-  static propTypes = {
-    fieldNames: PropTypes.object.isRequired,
-    optionsUrl: PropTypes.string,
-    onCascaderChange: PropTypes.func,
-    childrenUrl: PropTypes.string,
-    type: PropTypes.string,
-    valueUrl: PropTypes.string,
-  }
+  // static propTypes = {
+  //   fieldNames: PropTypes.object.isRequired,
+  //   optionsUrl: PropTypes.string,
+  //   onCascaderChange: PropTypes.func,
+  //   childrenUrl: PropTypes.string,
+  //   type: PropTypes.string,
+  //   valueUrl: PropTypes.string,
+  // }
 
-  static defaultProps = {
-    optionsUrl: testUrl,
-    onCascaderChange: () => {},
-    childrenUrl: testUrl,
-    type: 'add',
-    valueUrl: testUrl,
-  }
+  // static defaultProps = {
+  //   optionsUrl: testUrl,
+  //   onCascaderChange: () => {},
+  //   childrenUrl: testUrl,
+  //   type: 'add',
+  //   valueUrl: testUrl,
+  // }
 
   constructor(props) {
     super(props);
@@ -151,3 +151,20 @@ export default class AsyncCascader extends Component {
     );
   }
 }
+
+AsyncCascader.propTypes = {
+  fieldNames: PropTypes.object.isRequired,
+  optionsUrl: PropTypes.string,
+  onCascaderChange: PropTypes.func,
+  childrenUrl: PropTypes.string,
+  type: PropTypes.string,
+  valueUrl: PropTypes.string,
+};
+
+AsyncCascader.defaultProps = {
+  optionsUrl: testUrl,
+  onCascaderChange: () => {},
+  childrenUrl: testUrl,
+  type: 'add',
+  valueUrl: testUrl,
+};

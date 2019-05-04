@@ -65,7 +65,6 @@ export default class Home extends Component {
         <AsyncCascader
           fieldNames={{ label: 'id', value: 'id' }}
           optionsUrl={optionsUrl}
-          onCascaderChange={this.onCascaderChange}
           childrenUrl={childrenUrl}
           valueUrl={valueUrl}
           type="edit"
