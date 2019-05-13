@@ -50,6 +50,11 @@ export default class Home extends Component {
     console.log('onCascaderChange value: ', value);
   }
 
+  replace = () => {
+    // window.location.replace('https://www.baidu.com');
+    window.open('https://www.baidu.com');
+  }
+
   render() {
     const { files } = this.state;
     console.log('render files: ', files);
@@ -70,6 +75,8 @@ export default class Home extends Component {
           type="edit"
         />
         {/* <UploadImage /> */}
+        <a target="_blank" href="https://www.baidu.com" rel="noopener noreferrer">Baidu</a>
+        {/* <div onClick={this.replace}>Replace</div> */}
       </div>
     );
   }
