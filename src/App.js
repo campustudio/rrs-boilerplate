@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <BrowserRouter basename="/driver">
+          <BrowserRouter basename="/basename">
             <Route exact path="/" component={Home} />
           </BrowserRouter>
         </ConnectedRouter>
