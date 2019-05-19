@@ -1,4 +1,4 @@
-# vehicle-ui
+# rrs-boilerplate
 
 ## Installation
 Clone repo and run:
