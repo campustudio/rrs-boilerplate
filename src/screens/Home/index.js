@@ -56,7 +56,7 @@ export default class Home extends Component {
 
     return (
       <div>
-        <a target="_blank" href="https://www.baidu.com" rel="noopener noreferrer">Open Baidu</a>
+        authauth
         <PicturesWall
           action={jph}
           onFilesChange={this.onFilesChange}
