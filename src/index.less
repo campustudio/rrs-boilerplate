@@ -1,0 +1,49 @@
+.page-container {
+  position: relative;
+  padding: 63px 0px 50px;
+  height: 100%;
+}
+
+.bbgColor {
+  height: 100%;
+  overflow: auto;
+  // background: linear-gradient(left top, @primary-color*32, @primary-color);
+  // background: -ms-linear-gradient(left top, @primary-color*32, @primary-color);
+}
+
+@keyframes locomotive
+{
+  0% {top: 0px; left: 100%;}
+  100% {top: 0px; left: -80px;}
+}
+
+.flying-locomotive {
+  position: relative;
+  left: -80px;
+  font-size: 30px;
+  animation: locomotive 30s linear 2s infinite;
+}
+
+.left-panel {
+  position: fixed;
+  width: 256px;
+  top: 0;
+  bottom: 0;
+  background-image: url("static/media/nyc.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.2;
+}
+
+.right-panel {
+  position: absolute;
+  top: 63px;
+  right: 0;
+  bottom: 0;
+  left: 256px;
+  padding: 20px;
+  background: linear-gradient(45deg, @primary-color*32,  @primary-color*1);
+  background: -ms-linear-gradient(45deg, @primary-color*32,  @primary-color*1);
+  overflow: auto;
+}
