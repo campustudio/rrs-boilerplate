@@ -4,7 +4,7 @@ import { Exception } from 'ant-design-pro';
 const NotFound = () => (
   <Exception
     type="404"
-    redirect="www.baidu.com"
+    redirect="/"
     backText="回到主页"
   />
 );

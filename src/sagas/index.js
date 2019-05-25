@@ -4,6 +4,6 @@ import watchGetUsersSaga from './watchers/user';
 
 export default function* root() {
   yield all([
-    fork(watchGetUsersSaga),
+    // fork(watchGetUsersSaga),
   ]);
 }
