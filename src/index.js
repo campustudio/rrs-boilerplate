@@ -8,9 +8,9 @@ import 'promise-polyfill/src/polyfill';
 import store, { history } from './shares/store';
 import * as serviceWorker from './shares/serviceWorker';
 import './index.less';
-import Login from '@pages/Login';
+import LoginPanel from '@pages/LoginPanel';
 import Main from './routes/main';
-import NotFound from '@pages/NotFound';
+import NotFound from '@components/NotFound';
 
 const rootElement = document.getElementById('root');
 
@@ -21,7 +21,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <BrowserRouter basename="/rspa/auth">
             <Switch>
-              <Route exact path="/" component={Login} />
+              <Route exact path="/" component={LoginPanel} />
               <Route path="/main" component={Main} />
               <Route component={NotFound} />
             </Switch>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Login from '@h5components/Login';
 
-export default class Login extends Component {
+export default class LoginPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,12 +10,9 @@ export default class Login extends Component {
   }
 
   render() {
-    const { files } = this.state;
-    console.log('render files: ', files);
-
     return (
       <div>
-        Login
+        <Login />
       </div>
     );
   }

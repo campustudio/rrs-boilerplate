@@ -4,7 +4,7 @@ import './index.less';
 import Home from '@pages/Home';
 import Sidebar from '@components/Sidebar';
 import Header from '@components/Header';
-import NotFound from '@pages/NotFound';
+import NotFound from '@components/NotFound';
 
 export default class Main extends Component {
   render() {

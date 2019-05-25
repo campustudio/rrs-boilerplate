@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PicturesWall from '@components/PicturesWall';
 import AsyncCascader from '@components/AsyncCascader';
-import UploadImage from '@components/UploadImage';
 
 const testUrl = '//jsonplaceholder.typicode.com/posts/';
 
@@ -56,7 +55,6 @@ export default class Home extends Component {
 
     return (
       <div>
-        authauth
         <PicturesWall
           action={jph}
           onFilesChange={this.onFilesChange}
@@ -70,7 +68,6 @@ export default class Home extends Component {
           valueUrl={valueUrl}
           type="edit"
         />
-        {/* <UploadImage /> */}
       </div>
     );
   }
