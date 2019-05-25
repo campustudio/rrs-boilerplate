@@ -21,12 +21,13 @@ module.exports = override(
   }),
   addLessLoader({
     javascriptEnabled: true,
-    modifyVars: { '@primary-color': '#0d47a1' },
+    modifyVars: { '@primary-color': '#108ee9' },
   }),
   addWebpackAlias({
     '@apis': path.resolve(__dirname, 'src/apis/'),
     '@convertors': path.resolve(__dirname, 'src/convertors/'),
     '@pages': path.resolve(__dirname, 'src/pages/'),
+    '@screens': path.resolve(__dirname, 'src/screens/'),
     '@components': path.resolve(__dirname, 'src/shares/components/'),
     '@h5components': path.resolve(__dirname, 'src/shares/h5components/'),
     '@constants': path.resolve(__dirname, 'src/shares/constants/'),

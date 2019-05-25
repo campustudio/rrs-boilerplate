@@ -13,9 +13,6 @@ function handleAwaitRes(res) {
     }
   } catch (err) {
     alert(err.toString());
-    if (res.status !== 500) {
-      return res.json();
-    }
   }
 
   return null;
