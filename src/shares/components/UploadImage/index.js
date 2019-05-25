@@ -1,7 +1,6 @@
 import React from 'react';
 import { Upload, Icon, message } from 'antd';
 import { string, number } from 'prop-types';
-import { beforeUploadImage } from '../../utils';
 
 export default class UploadImage extends React.Component {
   static propTypes = {
@@ -34,7 +33,6 @@ export default class UploadImage extends React.Component {
           listType="picture-card"
           action="//jsonplaceholder.typicode.com/posts/"
           showUploadList={false}
-          beforeUpload={beforeUploadImage}
           onChange={info => this.handleImageChange(info)}
         >
           {
