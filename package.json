@@ -9,7 +9,13 @@
     "connected-react-router": "^4.5.0",
     "customize-cra": "^0.2.12",
     "env-cmd": "^9.0.1",
+    "es6-promise": "^4.2.6",
+    "fetch-ie8": "^1.5.0",
     "history": "^4.9.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "node-sass": "^4.12.0",
+    "promise-polyfill": "^8.1.0",
     "prop-types": "^15.7.2",
     "qs": "^6.7.0",
     "react": "^16.5.2",
@@ -22,7 +28,9 @@
     "react-scripts": "2.1.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
-    "redux-saga": "^0.16.2"
+    "redux-saga": "^0.16.2",
+    "uuid": "^3.3.2",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
