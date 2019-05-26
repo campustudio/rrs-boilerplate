@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './index.less';
 import Home from '@pages/Home';
+import PromotersManege from '@pages/PromotersManege';
+import Promoters from '@pages/Promoters';
 import Sidebar from '@components/Sidebar';
-import Header from '@components/Header';
+import Header from '@h5components/CustomerHeader';
 import NotFound from '@components/NotFound';
 
 export default class Main extends Component {
@@ -16,7 +18,8 @@ export default class Main extends Component {
           <Sidebar />
           <div className="right-panel">
             <Switch>
-              <Route exact path="/main" component={Home} />
+              <Route exact path="/main/promoters-manage" component={PromotersManege} />
+              <Route exact path="/main/promoters" component={Promoters} />
               <Route exact path="/main/user/:id" component={Home} />
               <Route exact path="/main/user-add" component={Home} />
               <Route exact path="/main/user-edit/:id" component={Home} />

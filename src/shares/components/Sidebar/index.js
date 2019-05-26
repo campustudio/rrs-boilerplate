@@ -41,12 +41,13 @@ class Sidebar extends React.Component {
           title={(
             <span>
               <Icon type="upload" />
-              <span>Upload</span>
+              <span>运营管理</span>
             </span>
           )}
         >
-          <Menu.Item key="/upload-image">image</Menu.Item>
-          <Menu.Item key="/pictures-wall">pictures wall</Menu.Item>
+          <Menu.Item key="/main/promoters-manage">H端推广人项目管理</Menu.Item>
+          <Menu.Item key="/pictures-wall">三方产品审核</Menu.Item>
+          <Menu.Item key="/pictures-wall">售后介入</Menu.Item>
         </SubMenu>
         <SubMenu
           key="sub2"

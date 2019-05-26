@@ -9,6 +9,7 @@ import store, { history } from './shares/store';
 import * as serviceWorker from './shares/serviceWorker';
 import './index.less';
 import LoginPanel from '@pages/LoginPanel';
+import Main from './routes/main';
 import H5Main from './routes/h5main';
 import NotFound from '@components/NotFound';
 
@@ -22,7 +23,8 @@ class App extends Component {
           <BrowserRouter basename="/rspa/auth">
             <Switch>
               <Route exact path="/" component={LoginPanel} />
-              <Route path="/main" component={H5Main} />
+              {/* <Route path="/main" component={H5Main} /> */}
+              <Route path="/main" component={Main} />
               <Route component={NotFound} />
             </Switch>
           </BrowserRouter>

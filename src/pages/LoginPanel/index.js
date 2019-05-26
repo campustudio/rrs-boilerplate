@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from '@h5components/Login';
+import LoginForm from '@components/LoginForm';
 import './index.less';
 
 export default class LoginPanel extends Component {
@@ -13,7 +14,7 @@ export default class LoginPanel extends Component {
   render() {
     return (
       <div className="login-panel-container">
-        <Login />
+        <LoginForm />
       </div>
     );
   }
