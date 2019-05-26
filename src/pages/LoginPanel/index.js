@@ -14,7 +14,7 @@ export default class LoginPanel extends Component {
   render() {
     return (
       <div className="login-panel-container">
-        <LoginForm />
+        <Login />
       </div>
     );
   }

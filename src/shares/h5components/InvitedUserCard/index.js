@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
+import Avatar from '@h5components/Avatar';
+import '../h5c.less';
 
 const InvitedUserCard = class extends Component {
   constructor(props) {
@@ -10,17 +12,25 @@ const InvitedUserCard = class extends Component {
   }
 
   render() {
-    const { size = 'lg' } = this.props;
+    const {
+      size = 'lg', avatarUrl = 'avatarUrl', nickName = 'nickName', createdAt = 1548847409,
+      subscriptionPackage = 2,
+    } = this.props;
 
     return (
       <WingBlank size={size}>
         <WhiteSpace size={size} />
         <Card>
-          <Card.Header
-            title={<span>{`微信昵称：${9999}`}</span>}
-            thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
-          />
-          <Card.Footer content={`会员类型`} extra={<div>{`注册日期：${190525}`}</div>} />
+          <Card.Body>
+            <div className="flex jcfs aic">
+              <div style={{ marginRight: 10 }}><Avatar size={30} src={avatarUrl} /></div>
+              <div>
+                <span>{`微信昵称：${nickName}`}</span>
+                <div>{`会员类型：${subscriptionPackage}`}</div>
+                <div>{`注册日期：${new Date(createdAt).toLocaleDateString()}`}</div>
+              </div>
+            </div>
+          </Card.Body>
         </Card>
         <WhiteSpace size={size} />
       </WingBlank>

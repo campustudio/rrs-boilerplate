@@ -13,7 +13,7 @@ export default class Award extends Component {
   render() {
     return (
       <div>
-        <div className="flex-jcsa">
+        <div className="total-amount">
           <span>
             <span style={{ lineHeight: '30px' }}>预估奖励总金额(每天结算)：</span>
           </span>
@@ -29,9 +29,9 @@ export default class Award extends Component {
                 <span className="red-font">{`金额：${9000}`}</span>
                 <span>邀请新用户就拿钱</span>
               </div>
-              <div className="flex-jcsb">
-                <span>{`推广人数：${9000}`}</span>
-                <span>{`奖励：￥${90}/新用户`}</span>
+              <div>
+                <div>{`推广人数：${9000}`}</div>
+                <div>{`奖励：￥${90}/新用户`}</div>
               </div>
             </Card.Body>
             <Card.Footer content={<span className="blue-font">*评级越高，每个用户奖励的金额越高。</span>} />
@@ -43,9 +43,9 @@ export default class Award extends Component {
               title="运营奖励"
             />
             <Card.Body>
-              <div className="flex-jcsb">
-                <span className="red-font">{`金额：${9000}`}</span>
-                <span>推荐新用户付会员费拿提成</span>
+              <div className="magin-b10">
+                <div className="red-font">{`金额：${9000}`}</div>
+                <div>推荐新用户付会员费拿提成</div>
               </div>
               <div className="flex-jcsb">
                 <span>{`推广付费快成团用户数：${29}`}</span>

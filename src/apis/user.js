@@ -1,4 +1,4 @@
-import { postAwait } from '@libs/asyncReq';
+import { postAwait, getAwait } from '@libs/asyncReq';
 import mock from './mock';
 
 export function handleAwaitResObj(resObj) {
@@ -50,17 +50,17 @@ const logout = async (profile) => {
   return logoutedObj;
 };
 
-const getUsers = async (profile) => {
-  const usersResObj = await postAwait('/api/users', {
-
+const getInvitees = async (profile) => {
+  const inviteesResObj = await getAwait('/api/v1/hub/h5/invitees', {
+    meowToken: profile.token,
   });
-  const users = handleAwaitResObj(usersResObj) || [];
+  const inviteesObj = handleAwaitResObj(inviteesResObj) || [];
 
-  return users;
+  return inviteesObj.invitees || [];
 };
 
 export default {
   login,
   logout,
-  getUsers,
+  getInvitees,
 };

@@ -30,3 +30,16 @@ export async function postAwait(url = '', obj = {}) {
   const resObj = await handleAwaitRes(res);
   return resObj;
 }
+
+export async function getAwait(url = '', headersObj) {
+  const res = await fetch(url, {
+    method: 'GET',
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      ...headersObj,
+    }),
+  });
+
+  const resObj = await handleAwaitRes(res);
+  return resObj;
+}

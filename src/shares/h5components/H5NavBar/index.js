@@ -10,7 +10,8 @@ const H5NavBar = class extends Component {
   }
 
   backToMain = () => {
-    this.props.history.push('/main');
+    const { backPath = '/main' } = this.props;
+    this.props.history.push(backPath);
   }
 
   render() {
@@ -20,7 +21,7 @@ const H5NavBar = class extends Component {
       <NavBar
         mode="dark"
         leftContent={<Icon onClick={this.backToMain} type="left" />}
-        style={{ position: 'fixed', width: '100%' }}
+        style={{ position: 'fixed', width: '100%', zIndex: 99 }}
       >
         {text}
       </NavBar>
