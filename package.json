@@ -1,5 +1,5 @@
 {
-  "name": "vehicle-ui",
+  "name": "rrs-boilerplate",
   "version": "0.1.1",
   "private": false,
   "license": "MIT",
@@ -57,5 +57,5 @@
     "not op_mini all"
   ],
   "homepage": "http://ip:port/rspa/auth/",
-  "proxy": "https://meow.dev.partai.cn/seller"
+  "proxy": "https://domain"
 }
