@@ -56,6 +56,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "http://138.68.43.195:80/rspa/auth/",
+  "homepage": "http://ip:port/rspa/auth/",
   "proxy": "https://meow.dev.partai.cn/seller"
 }
